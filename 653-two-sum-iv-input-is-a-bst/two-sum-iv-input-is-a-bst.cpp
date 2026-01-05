@@ -11,31 +11,17 @@
  */
 class Solution {
 public:
+    
+    unordered_set<int>st;
     bool findTarget(TreeNode* root, int k) {
-        vector<int>temp;
-        queue<TreeNode*>q;
-        q.push(root);
-        while(!q.empty()){
-            int s=q.size();
-            TreeNode* node=q.front();
-            q.pop();
-            temp.push_back(node->val);
-                if(node->left){
-                    q.push(node->left);
+        if(!root){
+            return false;
+        }
+        if(st.count(k-root->val)){
+            return true;
+        }
+        st.insert(root->val);
 
-                }
-                if(node->right){
-                    q.push(node->right);
-                }
-        }
-        sort(temp.begin(),temp.end());
-        for(int i=0;i<temp.size();i++){
-          for(int j=i+1;j<temp.size();j++){
-            if(temp[i]+temp[j]==k){
-                return true;
-            }
-          }
-        }
-        return false;
+        return findTarget(root->left,k) || findTarget(root->right,k);
     }
 };
