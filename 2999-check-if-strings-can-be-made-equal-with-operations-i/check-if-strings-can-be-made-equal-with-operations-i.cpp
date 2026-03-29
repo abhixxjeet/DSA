@@ -4,7 +4,7 @@ public:
         string s=s2;
         char temp2=s2[2];
         char temp3=s2[3];
-        int i=0;
+
         if(s1==s2){
             return true;
         }
