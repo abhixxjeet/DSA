@@ -4,17 +4,18 @@ public:
         int curr=0;
         int total=0;
         int start=0;
+
         for(int i=0;i<gas.size();i++){
             int diff=gas[i]-cost[i];
-            
+
             curr+=diff;
             total+=diff;
+
             if(curr<0){
                 curr=0;
                 start=i+1;
             }
         }
-
         if(total>=0){
             return start;
         }
