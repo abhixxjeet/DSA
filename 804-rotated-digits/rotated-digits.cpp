@@ -11,19 +11,15 @@ public:
 
             for(int j=0;j<len;j++){
                 if(str[j]=='2'){
-                    str[j]='5';
                     change =1;
                 }
                 else if(str[j]=='5'){
-                    str[j]='2';
                     change=1;
                 }
                 else if(str[j]=='6'){
-                    str[j]='9';
                     change=1;
                 }
                 else if(str[j]=='9'){
-                    str[j]='6';
                     change=1;
                 }
                 else if(str[j]=='3' || str[j]=='4' || str[j]=='7'){
