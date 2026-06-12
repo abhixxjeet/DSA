@@ -1,7 +1,7 @@
 class Solution {
-public:
+public: 
     vector<vector<int>>ans;
-    void solve(vector<int>&nums,vector<int>&temp,int i){
+    void solve(vector<int>&nums, vector<int>&temp,int i){
         if(i>=nums.size()){
             ans.push_back(temp);
             return;
@@ -10,11 +10,13 @@ public:
         solve(nums,temp,i+1);
         temp.pop_back();
         solve(nums,temp,i+1);
+
     }
     vector<vector<int>> subsets(vector<int>& nums) {
-        vector<int>temp;
         int i=0;
+        vector<int>temp;
         solve(nums,temp,i);
+
         return ans;
     }
 };
