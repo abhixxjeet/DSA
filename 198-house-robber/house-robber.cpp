@@ -2,19 +2,23 @@ class Solution {
 public:
     int rob(vector<int>& nums) {
         int n=nums.size();
-        if(n==1){
+        vector<int>temp(n);
+        if(n<=1){
             return nums[0];
         }
-        vector<int>t(n+1,0);
-        t[0]=0;
-        t[1]=nums[0];
-
-        for(int i=2;i<=n;i++){
-            int steal=nums[i-1]+t[i-2];
-            int skip=t[i-1];
-
-            t[i]=max(steal,skip);
+        else if(n<=2){
+            return max(nums[1],nums[0]);
         }
-        return t[n];
+        else if(n<=3){
+            return max((nums[0]+nums[2]),nums[1]);
+        }
+        temp[0]=nums[0];
+        temp[1]=nums[1];
+        temp[2]=nums[0]+nums[2];
+
+        for(int i=3;i<n;i++){
+           temp[i]=max(temp[i-2],temp[i-3])+nums[i];
+        }
+        return max(temp[n-2],temp[n-1]);
     }
 };
