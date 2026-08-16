@@ -1,20 +1,23 @@
 class Solution {
 public:
     int coinChange(vector<int>& coins, int amount) {
-        const int INF=1e9;
-
-        vector<int>dp(amount+1,INF);
-
+        int n=coins.size();
+        vector<int>dp(amount+1,amount+1);
         dp[0]=0;
 
         for(int i=1;i<=amount;i++){
+
             for(int coin : coins){
-                if(i-coin >=0){
+                if(coin <=i){
                     dp[i]=min(dp[i],dp[i-coin]+1);
                 }
             }
         }
 
-        return dp[amount]==INF ? -1:dp[amount];
+        if(dp[amount]==amount+1){
+            return -1;
+        }
+
+        return dp[amount];
     }
 };
