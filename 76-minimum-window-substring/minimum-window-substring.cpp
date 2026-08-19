@@ -1,35 +1,53 @@
 class Solution {
 public:
+
+    bool allzeros(vector<int>temp){
+        for(int i=0;i<temp.size();i++){
+            if(temp[i]>0){
+                return false;
+            }
+        }
+        return true;
+    }
     string minWindow(string s, string t) {
-        if(s.empty() || t.empty()){
+        int m=s.length();
+        int n=t.length();
+
+        vector<int>temp(128,0);
+
+        for(int i=0;i<n;i++){
+            temp[t[i]]++;
+        }
+
+        int i=0;
+        int j=0;
+
+        int count=INT_MAX;
+        int start=0;
+        int minLen=0;
+
+        while(j<m){
+            temp[s[j]]--;
+            
+
+            while(allzeros(temp)){
+                int temp1=j-i+1;
+                if(temp1<count){
+                    start=i;
+                    minLen=j-i+1;
+                    count=temp1;
+                }
+                temp[s[i]]++;
+                i++;
+            }
+
+            j++;
+        }
+        
+        if(count==INT_MAX){
             return "";
         }
-        unordered_map<char,int>need,window;
-        for(char c:t){
-            need[c]++;
-        }
-        int have=0,needCount=need.size();
-        int left=0,minLen=INT_MAX,start=0;
 
-        for(int right=0;right<s.size();right++){
-            char c=s[right];
-            window[c]++;
-            if(need.count(c) && window[c]==need[c]){
-                have++;
-            }
-            while(have == needCount){
-                if(right-left+1<minLen){
-                    minLen=right-left+1;
-                    start=left;
-                }
-                char d=s[left];
-                window[d]--;
-                if(need.count(d) && window[d]<need[d]){
-                    have--;
-                }
-                left++;
-            }
-        }
-        return minLen==INT_MAX ? "":s.substr(start,minLen);
+        return s.substr(start,minLen);
     }
 };
