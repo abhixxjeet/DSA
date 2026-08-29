@@ -1,25 +1,25 @@
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        int count=0;
+        int n=s.length();
+        int i=0;
+        int j=0;
+        int ans=0;
 
-        for(int i=0;i<s.length();i++){
-            vector<int>arr(256,0);
-            int temp=0;
-            for(int j=i;j<s.length();j++){
-                int k=s[j];
-                arr[k]++;
-                if(arr[k]>1){
-                    break;
-                }
-                else{
-                    temp++;
-                }
-            }
+        vector<int>temp(256,0);
+        while(j<n){
+           temp[s[j]]++;
 
-            count=max(count,temp);
+           while(temp[s[j]]>1){
+              temp[s[i]]--;
+              i++;
+           }
+
+           ans=max(ans,j-i+1);
+           j++;
+
         }
-
-        return count;
+        
+        return ans;
     }
 };
